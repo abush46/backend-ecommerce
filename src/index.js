@@ -1,7 +1,6 @@
 import express from 'express'
 
 const app = express()
-const { register, login, updateUser, deleteUser, userById, resetPassword } = require("./controllers/auth/auth");
 
 app.get('/', (_req, res) => {
   res.send('Hello Express!')
