@@ -11,7 +11,7 @@ app.get('/', (_req, res) => {
   res.send('Hello Express!')
 })
 
-app.post('/api/data', createUser)=> {
+app.post('/api/data', (req,res)=> {
     // Access the request body
    const requestData = req.body; 
 
