@@ -1,7 +1,7 @@
 import express from 'express'
 
 const app = express()
-const {  login } = require("../controllers/auth/auth");
+const {  login } = require("../controllers/auth");
 
 app.get('/', (_req, res) => {
   res.send('Hello Express!')
