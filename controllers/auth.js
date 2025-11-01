@@ -6,7 +6,7 @@ function generateAuthToken(data){
   const token = jwt.sign(data, JWT_SECRET_KEY, { expiresIn: '10h' })
   return token
 }
-module.exports.login = async (req, res) => {
+module.exports.login = (req, res) => {
 
    // Access the request body
     const requestData = req.body; 
