@@ -26,3 +26,7 @@ module.exports.login = (req, res) => {
         data: requestData,
       });*/
 }
+module.exports.register=(req,res)=> {
+
+res.status(201).send({message:'register message'});
+}
