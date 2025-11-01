@@ -1,13 +1,17 @@
 import express from 'express'
 
 const app = express()
-const {  login } = require("../controllers/auth");
+const { createUser } = require('../controllers/userController');
+// ... other imports and MongoDB connection ...
+
+app.use(express.json());
+
 
 app.get('/', (_req, res) => {
   res.send('Hello Express!')
 })
 
-app.post('/api/data', login);
+app.post('/api/data', createUser);
 //=> {
     // Access the request body
   //  const requestData = req.body; 
