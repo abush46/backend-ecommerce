@@ -1,23 +1,25 @@
 import express from 'express'
 
 const app = express()
+const {  login } = require("./controllers/auth/auth");
 
 app.get('/', (_req, res) => {
   res.send('Hello Express!')
 })
 
-app.post('/api/data', (req, res) => {
+app.post('/api/data', login);
+//=> {
     // Access the request body
-    const requestData = req.body; 
+  //  const requestData = req.body; 
 
-    console.log('Received data:', requestData);
+   // console.log('Received data:', requestData);
 
     // Process the data (e.g., save to a database)
     // ...
 
     // Send a response back to the client
-    res.status(201).send({ message: 'Data received successfully!', data: requestData });
-});
+  //  res.status(201).send({ message: 'Data received successfully!', data: requestData });
+//});
 
 
 app.get('/api/users/:id', (_req, res) => {
