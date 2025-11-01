@@ -17,11 +17,12 @@ module.exports.login = (req, res) => {
     // ...
 
     // Send a response back to the client
-  // res.status(201).send({ message: 'Data received successfully!', data: requestData });
-  return res.json({
+  res.status(201).send({ message: 'Data received successfully!', data: requestData });
+
+ /* return res.json({
         success: true,
         status: 200,
         message: "user Logged in",
         data: requestData,
-      });
+      });*/
 }
