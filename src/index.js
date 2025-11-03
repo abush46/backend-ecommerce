@@ -1,7 +1,7 @@
 import express from 'express'
 
 const app = express()
-const { createUser } = require('../controllers/userController');
+const { createUser } = require('./controllers/userController');
 // ... other imports and MongoDB connection ...
 
 app.use(express.json());
