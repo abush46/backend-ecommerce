@@ -13,7 +13,8 @@ app.use('/api/users', userRoutes);
 
 // Basic root route (optional)
 app.get('/', (req, res) => {
-  res.send('API Server is Running');
+   res.json({ message: 'Data received successfully!' });
+  //res.send('API Server is Running');
 });
 
 /* app.get('/', (_req, res) => {
