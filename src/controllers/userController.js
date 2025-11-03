@@ -1,4 +1,5 @@
 // Example functions (might include MongoDB logic)
+import express from 'express'
 exports.getAllUsers = (req, res) => {
   // Logic to fetch all users from MongoDB
   res.status(200).json({ message: 'Get all users' });
@@ -31,5 +32,5 @@ exports.getUserById = (req, res) => {
 exports.getAllUsers = (req, res) => {
   //const userId = req.params.id;
   // Logic to fetch a user by ID
-  res.status(200).json({ message: `Get all user` });
+  res.json({ message: `Get all user` });
 };
