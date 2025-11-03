@@ -10,7 +10,7 @@ const { createUser,getAllUsers } = require('./controllers/userController');
 app.use(express.json());
 
 
-app.use('/api/users', getAllUsers);
+app.post('/api/users', getAllUsers);
 
 // Basic root route (optional)
 app.get('/', (req, res) => {
