@@ -1,20 +1,21 @@
 import express from 'express'
+import { get } from 'http';
 
 const app = express()
-//const { createUser } = require('./controllers/userController');
+const { createUser,getAllUsers } = require('./controllers/userController');
 // ... other imports and MongoDB connection ...
-const userRoutes = require('./routes/userRoutes'); // Import the user routes
+//const userRoutes = require('./routes/userRoutes'); // Import the user routes
 
 // Middleware to parse JSON bodies (essential for POST requests)
 app.use(express.json());
 
 
-app.use('/api/users', userRoutes);
+app.use('/api/users', getAllUsers);
 
 // Basic root route (optional)
 app.get('/', (req, res) => {
-   res.json({ message: 'Data received successfully!' });
-  //res.send('API Server is Running');
+   //res.json({ message: 'Data received successfully!' });
+  res.send('API Server is Running');
 });
 
 /* app.get('/', (_req, res) => {
