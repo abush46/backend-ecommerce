@@ -21,7 +21,7 @@ app.post('/api/data', (req,res)=> {
     // ...
 
     // Send a response back to the client
-  res.status(201).send({ message: 'Data received successfully!', data: requestData });
+  res.json({ message: 'Data received successfully!', data: requestData });
 });
 
 
