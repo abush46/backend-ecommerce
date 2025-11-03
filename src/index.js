@@ -10,9 +10,12 @@ app.use(express.json());
 app.get('/', (_req, res) => {
   res.send('Hello Express!')
 })
-
-//app.post('/api/data', createUser);
-         //(req,res)=> {
+app.post('/api/data', (_req, res) => {
+  res.json({ message: 'Data received successfully!' });
+})
+//app.post('/api/data',
+  //createUser);
+         //(req,res)) => {
     // Access the request body
 //   const requestData = req.body; 
 
@@ -23,7 +26,7 @@ app.get('/', (_req, res) => {
 
     // Send a response back to the client
  // res.json({ message: 'Data received successfully!', data: requestData });
-//});
+ 
 
 
 app.get('/api/users/:id', (_req, res) => {
