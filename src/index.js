@@ -10,7 +10,7 @@ app.use(express.json());
 app.get('/', (_req, res) => {
   res.send('Hello Express!')
 })
-app.post('/api/data', (_req, res) => {
+app.post('/api/data', (req, res) => {
   res.json({ message: 'Data received successfully!' });
 })
 //app.post('/api/data',
