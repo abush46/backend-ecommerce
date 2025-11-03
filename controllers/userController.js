@@ -4,10 +4,22 @@ exports.getAllUsers = (req, res) => {
   res.status(200).json({ message: 'Get all users' });
 };
 
-exports.createUser = (req, res) => {
-  const userData = req.body;
+module.exports.createUser = async (req, res) => {
+ 
   // Logic to create a new user in MongoDB
-  res.status(201).json({ message: 'User created', data: userData });
+ // res.status(201).json({ message: 'User created', data: userData });
+  try{
+     const userData = req.body;
+return res.json({
+            success : true,
+            status : 400,
+            message : "list of all categories",
+            categories
+                })
+  }
+  catch(error){
+        return res.send(error.message)
+    }
 };
 
 exports.getUserById = (req, res) => {
