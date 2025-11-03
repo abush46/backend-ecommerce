@@ -11,6 +11,10 @@ app.use(express.json());
 
 
 app.post('/api/users', getAllUsers);
+ 
+app.post('/api/data', (req, res) => {
+  res.json({ message: 'Data received successfully!' });
+})
 
 // Basic root route (optional)
 app.get('/', (req, res) => {
