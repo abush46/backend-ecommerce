@@ -6,7 +6,7 @@ const app = express()
 import {getUserById,createUser} from './controllers/userController.js';
 // ... other imports and MongoDB connection ...
 //const userRoutes = require('./routes/userRoutes'); // Import the user routes
-
+//const mogoose = require("./config/database")();
 // Middleware to parse JSON bodies (essential for POST requests)
 //app.use(express.json());
 const getAllUsers = function (req, res)  {
