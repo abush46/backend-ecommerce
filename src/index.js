@@ -2,7 +2,7 @@ import express from 'express'
 import { get } from 'http';
 
 const app = express()
-//const { createUser,getAllUsers } = require('./controllers/userController');
+const { getUserById } = require('./controllers/userController');
 // ... other imports and MongoDB connection ...
 //const userRoutes = require('./routes/userRoutes'); // Import the user routes
 
