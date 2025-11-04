@@ -10,7 +10,7 @@ const { createUser,getAllUsers } = require('./controllers/userController');
 app.use(express.json());
 
 
-app.post('/api/users', getAllUsers);
+//app.post('/api/users', getAllUsers);
  
 app.post('/api/data', (req, res) => {
   res.json({ message: 'Data received successfully!' });
