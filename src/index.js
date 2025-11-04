@@ -2,13 +2,17 @@ import express from 'express'
 import { get } from 'http';
 
 const app = express()
-const { createUser,getAllUsers } = require('./controllers/userController');
+//const { createUser,getAllUsers } = require('./controllers/userController');
 // ... other imports and MongoDB connection ...
 //const userRoutes = require('./routes/userRoutes'); // Import the user routes
 
 // Middleware to parse JSON bodies (essential for POST requests)
 //app.use(express.json());
-
+const getAllUsers = function (req, res)  {
+  //const userId = req.params.id;
+  // Logic to fetch a user by ID
+  res.json({ message: `Get all user` });
+};
 
 app.post('/api/users', getAllUsers);
  
