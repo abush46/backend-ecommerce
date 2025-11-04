@@ -2,7 +2,7 @@ import express from 'express'
 import { get } from 'http';
 
 const app = express()
-//const { createUser,getAllUsers } = require('./controllers/userController');
+const { createUser,getAllUsers } = require('./controllers/userController');
 // ... other imports and MongoDB connection ...
 //const userRoutes = require('./routes/userRoutes'); // Import the user routes
 
@@ -10,7 +10,7 @@ const app = express()
 //app.use(express.json());
 
 
-//app.post('/api/users', getAllUsers);
+app.post('/api/users', getAllUsers);
  
 app.post('/api/data', (req, res) => {
   res.json({ message: 'Data received successfully!' });

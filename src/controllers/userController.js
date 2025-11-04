@@ -29,7 +29,7 @@ exports.getUserById = (req, res) => {
   res.status(200).json({ message: `Get user ${userId}` });
 };
 
-exports.getAllUsers = (req, res) => {
+exports.getAllUsers = function (req, res)  {
   //const userId = req.params.id;
   // Logic to fetch a user by ID
   res.json({ message: `Get all user` });
