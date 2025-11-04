@@ -4,8 +4,8 @@ import express from 'express'
   // Logic to fetch all users from MongoDB
   res.status(200).json({ message: 'Get all users' });
 }; */
-/* 
-module.exports.createUser = async (req, res) => {
+
+export const createUser = async (req, res) => {
 
   // Logic to create a new user in MongoDB
  // res.status(201).json({ message: 'User created', data: userData });
@@ -22,8 +22,8 @@ return res.json({
         return res.send(error.message)
     }
 };
- */
-const getUserById = (req, res) => {
+ 
+export const getUserById = (req, res) => {
   const userId = req.params.id;
   // Logic to fetch a user by ID
   res.status(200).json({ message: `Get user ${userId}` });
@@ -34,4 +34,4 @@ const getUserById = (req, res) => {
   // Logic to fetch a user by ID
   res.json({ message: `Get all user` });
 }; */
-export default getUserById;
+//export default getUserById;
