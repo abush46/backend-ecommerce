@@ -2,7 +2,8 @@ import express from 'express'
 import { get } from 'http';
 
 const app = express()
-const { getUserById } = require('./controllers/userController');
+//const { getUserById } = require('./controllers/userController');
+import getUserById from './controllers/userController.js';
 // ... other imports and MongoDB connection ...
 //const userRoutes = require('./routes/userRoutes'); // Import the user routes
 
