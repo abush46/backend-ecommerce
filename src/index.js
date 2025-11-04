@@ -7,7 +7,7 @@ const { createUser,getAllUsers } = require('./controllers/userController');
 //const userRoutes = require('./routes/userRoutes'); // Import the user routes
 
 // Middleware to parse JSON bodies (essential for POST requests)
-app.use(express.json());
+//app.use(express.json());
 
 
 //app.post('/api/users', getAllUsers);
