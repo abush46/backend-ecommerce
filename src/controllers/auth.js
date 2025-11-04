@@ -6,7 +6,7 @@ function generateAuthToken(data){
   const token = jwt.sign(data, JWT_SECRET_KEY, { expiresIn: '10h' })
   return token
 }
-module.exports.login = (req, res) => {
+const login = (req, res) => {
  
    // Access the request body
     const requestData = req.body; 
@@ -26,7 +26,9 @@ module.exports.login = (req, res) => {
         data: requestData,
       });*/
 }
-module.exports.register=(req,res)=> {
+const register=(req,res)=> {
 
 res.status(201).send({message:'register message'});
 }
+
+export {register,generateAuthToken,login};
