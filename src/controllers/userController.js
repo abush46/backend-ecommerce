@@ -11,11 +11,11 @@ export const createUser = async (req, res) => {
  // res.status(201).json({ message: 'User created', data: userData });
   try{
      const userData = req.body;
-return res.json({
+ res.json({
             success : true,
             status : 400,
             message : "list of all categories",
-            categories
+            data: userData
                 })
   }
   catch(error){
