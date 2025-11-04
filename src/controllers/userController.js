@@ -1,10 +1,10 @@
 // Example functions (might include MongoDB logic)
 import express from 'express'
-exports.getAllUsers = (req, res) => {
+/* exports.getAllUsers = (req, res) => {
   // Logic to fetch all users from MongoDB
   res.status(200).json({ message: 'Get all users' });
-};
-
+}; */
+/* 
 module.exports.createUser = async (req, res) => {
 
   // Logic to create a new user in MongoDB
@@ -22,15 +22,16 @@ return res.json({
         return res.send(error.message)
     }
 };
-
-exports.getUserById = (req, res) => {
+ */
+const getUserById = (req, res) => {
   const userId = req.params.id;
   // Logic to fetch a user by ID
   res.status(200).json({ message: `Get user ${userId}` });
 };
 
-exports.getAllUsers = function (req, res)  {
+/* exports.getAllUsers = function (req, res)  {
   //const userId = req.params.id;
   // Logic to fetch a user by ID
   res.json({ message: `Get all user` });
-};
+}; */
+export default getUserById;
