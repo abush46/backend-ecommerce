@@ -10,12 +10,12 @@ export const createUser = async (req, res) => {
   // Logic to create a new user in MongoDB
  // res.status(201).json({ message: 'User created', data: userData });
   try{
-     const name = req;
+     const name = req.body;
  res.json({
             success : true,
             status : 400,
             message : "list of all categories",
-            data: {req}
+            data: name
                 })
   }
   catch(error){
