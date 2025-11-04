@@ -1,5 +1,7 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+/* const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken"); */
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 const JWT_SECRET_KEY = "seceret";
 
 function generateAuthToken(data){
