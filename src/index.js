@@ -8,7 +8,7 @@ import {getUserById,createUser} from './controllers/userController.js';
 //const userRoutes = require('./routes/userRoutes'); // Import the user routes
 //const mogoose = require("./config/database")();
 // Middleware to parse JSON bodies (essential for POST requests)
-//app.use(express.json());
+app.use(express.json());
 const getAllUsers = function (req, res)  {
   //const userId = req.params.id;
   // Logic to fetch a user by ID
