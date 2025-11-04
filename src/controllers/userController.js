@@ -15,7 +15,7 @@ export const createUser = async (req, res) => {
             success : true,
             status : 400,
             message : "list of all categories",
-            data: name
+            data: name.name
                 })
   }
   catch(error){
