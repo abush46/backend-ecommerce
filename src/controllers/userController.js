@@ -19,7 +19,7 @@ export const createUser = async (req, res) => {
                 })
   }
   catch(error){
-        return res.send(error.message)
+        return res.json({message: `errorAA: ${error.message}`});
     }
 };
  
