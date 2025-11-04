@@ -14,7 +14,7 @@ const getAllUsers = function (req, res)  {
   // Logic to fetch a user by ID
   res.json({ message: `Get all user` });
 };
-
+app.post('/api/byId', getUserById);
 app.post('/api/users', getAllUsers);
  
 app.post('/api/data', (req, res) => {
