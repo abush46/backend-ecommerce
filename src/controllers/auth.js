@@ -7,7 +7,7 @@ function generateAuthToken(data){
   return token
 }
 module.exports.login = (req, res) => {
-
+ 
    // Access the request body
     const requestData = req.body; 
 
