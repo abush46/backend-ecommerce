@@ -18,4 +18,5 @@ const userSchema = Schema({
 //     this.token = jwt.sign({ userID: this._id, email: this.email }, TOKEN_KEY, { expiresIn: '10h' })
 // }
 
-export default model('user',userSchema)
+const userModel = model('user', userSchema);
+export default userModel;
