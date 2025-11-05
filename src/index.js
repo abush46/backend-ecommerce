@@ -4,7 +4,7 @@ import { get } from 'http';
 const app = express()
 //const { getUserById } = require('./controllers/userController');
 import { getUserById, createUser } from './controllers/userController.js';
-import { register } from './controllers/auth.js';
+import { register } from './controllers/auth/auth.js';
 // ... other imports and MongoDB connection ...
 //const userRoutes = require('./routes/userRoutes'); // Import the user routes
 //const mogoose = require("./config/database")();
