@@ -1,26 +1,61 @@
-import express from 'express'
-import { get } from 'http';
+const express = require('express')
+const app = express();
+const port = process.env.PORT;
+var bodyParser = require('body-parser');
+const dotenv = require('dotenv');
+const jwt = require('jsonwebtoken');
+var path = require('path');
+var cors = require('cors')
 
-const app = express()
-//const { getUserById } = require('./controllers/userController');
+// To access public folder
+app.use(cors())
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json())
+
+// Set up Global configuration access
+dotenv.config();
+
+// MULTER
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads/')
+  },
+  filename: function (req, file, cb) {
+    let uploadFile = file.originalname.split('.')
+    let name = `${uploadFile[0]}-${Date.now()}.${uploadFile[uploadFile.length-1]}`
+    cb(null, name)
+  }
+})
+const upload = multer({ storage: storage })
+
+const { register, login, updateUser, deleteUser, userById, resetPassword } = require("./controllers/auth/auth");
+const { UseraddProduct,addProduct, updateProduct, deleteProduct, getAllProducts } = require("./controllers/products/products")
+const { checkout, addToCart, cart, removeFromCart } = require("./controllers/user/cart")
+const { isAdmin, checkAuth } = require("./controllers/middlewares/auth");
+const { dashboardData, getAllUsers } = require('./controllers/admin/dashboard');
+const { getAllOrders, changeStatusOfOrder } = require('./controllers/admin/orders');
+const { orders } = require('./controllers/user/orders');
+const { addCategory, getCategories, updateCategory, deleteCategory } = require('./controllers/categories/category');
+const { addToWishlist, wishlist, removeFromWishlist } = require('./controllers/user/wishlist');
+const mongoose = require("./config/database")()
+
 import { getUserById, createUser } from './controllers/userController.js';
-import { register } from './controllers/auth/auth.js';
-// ... other imports and MongoDB connection ...
-//const userRoutes = require('./routes/userRoutes'); // Import the user routes
-//const mogoose = require("./config/database")();
-// Middleware to parse JSON bodies (essential for POST requests)
-app.use(express.json());
+
+
+
 const getAllUsers = function (req, res)  {
   //const userId = req.params.id;
   // Logic to fetch a user by ID
   res.json({ message: `Get all user` });
 };
 app.post('/api/byId', getUserById);
-app.post('/api/users', getAllUsers);
+
  app.post('/api/create', createUser);
-app.post('/api/data', (req, res) => {
-  res.json({ message: 'Data received successfully!' });
-})
+
 
 // Basic root route (optional)
 app.get('/', (req, res) => {
