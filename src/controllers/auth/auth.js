@@ -1,4 +1,4 @@
-import {userModel} from "../../models/user";
+import {userModel} from "../../models/user.js";
 import { compare, hash } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 const JWT_SECRET_KEY = process.env.TOKEN_KEY
