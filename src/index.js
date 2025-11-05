@@ -43,7 +43,7 @@ const { addCategory, getCategories, updateCategory, deleteCategory } = require('
 const { addToWishlist, wishlist, removeFromWishlist } = require('./controllers/user/wishlist');
 const mongoose = require("./config/database")()
 
-import { getUserById, createUser } from './controllers/userController.js';
+const { getUserById, createUser } =require('./controllers/userController');
 
 
 
