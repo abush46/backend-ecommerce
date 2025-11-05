@@ -47,11 +47,7 @@ const { getUserById, createUser } =require('./controllers/userController');
 
 
 
-const getAllUsers = function (req, res)  {
-  //const userId = req.params.id;
-  // Logic to fetch a user by ID
-  res.json({ message: `Get all user` });
-};
+
 app.post('/api/byId', getUserById);
 
  app.post('/api/create', createUser);
