@@ -43,14 +43,14 @@ const { addCategory, getCategories, updateCategory, deleteCategory } = require('
 const { addToWishlist, wishlist, removeFromWishlist } = require('./controllers/user/wishlist');
 const mongoose = require("./config/database")()
 
-const { getUserById, createUser } =require('./controllers/userController');
+//const { getUserById, createUser } =require('./controllers/userController');
 
 
 
 
-app.post('/api/byId', getUserById);
+//app.post('/api/byId', getUserById);
 
- app.post('/api/create', createUser);
+ //app.post('/api/create', createUser);
 
 
 // Basic root route (optional)
