@@ -9,7 +9,7 @@ var cors = require('cors')
 
 // To access public folder
 app.use(cors())
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/static',express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json())
