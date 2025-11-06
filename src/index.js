@@ -45,9 +45,9 @@ const mongoose = require("./config/database");
 const {getProducts} = require("./controllers/test/testController");
 //const { getUserById, createUser } =require('./controllers/userController');
 
+mongoose();
 
-
-
+getProducts();
 //app.post('/api/byId', getUserById);
 
  //app.post('/api/create', createUser);
