@@ -83,7 +83,7 @@ app.post("/api/user-add-product",[checkAuth], UseraddProduct)
 app.get("/api/products", getAllProducts)
 app.post("/api/update-product", [isAdmin], updateProduct)
 app.get("/api/delete-product", [isAdmin], deleteProduct)
-/api
+
 
 // CATEGORIES
 app.post("/api/category", [isAdmin], addCategory)
