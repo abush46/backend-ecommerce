@@ -47,7 +47,7 @@ const {getProducts} = require("./controllers/test/testController");
 
 mongoose();
 
-getProducts();
+//getProducts();
 //app.post('/api/byId', getUserById);
 
  //app.post('/api/create', createUser);
