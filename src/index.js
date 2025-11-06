@@ -59,7 +59,7 @@ app.get('/', (req, res) => {
   res.send('API Server is Running');
 });
 
-app.get('/test-products', getProducts);
+app.get('api/test-products', getProducts);
 
 // AUTH
 app.post('/register', register);
