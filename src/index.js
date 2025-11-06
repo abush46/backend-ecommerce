@@ -41,7 +41,7 @@ const { getAllOrders, changeStatusOfOrder } = require('./controllers/admin/order
 const { orders } = require('./controllers/user/orders');
 const { addCategory, getCategories, updateCategory, deleteCategory } = require('./controllers/categories/category');
 const { addToWishlist, wishlist, removeFromWishlist } = require('./controllers/user/wishlist');
-const mongoose = require("./config/database")()
+const mongoose = require("./config/database");
 
 //const { getUserById, createUser } =require('./controllers/userController');
 
