@@ -6,7 +6,7 @@ module.exports.getProducts = async (req, res) => {
         /* const products = await productModel.find();
         const productsCount = await productModel.find().count(); */
 
-        return res.json({
+         res.json({
             success : true,
             status : 400,
             message : "list of all products",
@@ -16,6 +16,6 @@ module.exports.getProducts = async (req, res) => {
         })
 
     }catch(error){
-        return res.json("Error h:",error.message)
+         res.json("Error h:",error.message)
     }
 }
