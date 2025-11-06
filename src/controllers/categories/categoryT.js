@@ -1,6 +1,6 @@
-const categoryModel = require("../../models/category")
+import categoryModel, { find, findOne, findOneAndUpdate, findOneAndDelete } from "../../models/category";
 
-module.exports.addCategory = async (req, res) => {
+export async function addCategory(req, res) {
     try{
 
         const {title, description, image} = req.body;
@@ -21,11 +21,11 @@ module.exports.addCategory = async (req, res) => {
     }
 }
 
-module.exports.getCategories = async (req, res) => {
+export async function getCategories(req, res) {
     try{
 
-        const categories = await categoryModel.find();
-        const categoriesCount = await categoryModel.find().count();
+        const categories = await find();
+        const categoriesCount = await find().count();
 
         return res.json({
             success : true,
@@ -41,17 +41,17 @@ module.exports.getCategories = async (req, res) => {
 }
 
 
-module.exports.updateCategory = async (req, res) => {
+export async function updateCategory(req, res) {
     try{
 
         const {title, description, image} = req.body;
         const {id} = req.query;
 
         // check if product exist with the given product id
-        const category = await categoryModel.findOne({_id : id})
+        const category = await findOne({_id : id})
 
         if(category){
-            const updatedCategory = await categoryModel.findOneAndUpdate({_id : id}, req.body, {new :true})
+            const updatedCategory = await findOneAndUpdate({_id : id}, req.body, {new :true})
 
             return res.json({
                 success : true,
@@ -74,13 +74,13 @@ module.exports.updateCategory = async (req, res) => {
     }
 }
 
-module.exports.deleteCategory = async (req, res) => {
+export async function deleteCategory(req, res) {
     try{
 
         const {id} = req.query;
         
         // check if product exist with the given product id
-        const category = await categoryModel.findOneAndDelete({_id : id})
+        const category = await findOneAndDelete({_id : id})
         if(!category){
             return res.json({
                 success : false,
