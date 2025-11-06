@@ -1,11 +1,12 @@
-const mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
 const jwt = require('jsonwebtoken');
 /* import { Schema, model } from 'mongoose';
+//const {mongoose} = require('mongoose');
 import jwt from 'jsonwebtoken'; */
 
 // const { TOKEN_KEY } = process.env
 
-const userSchema = mongoose.Schema({
+const userSchema = Schema({
     name : String,
     email : {type : String, required : true, unique : true},
     userType : String,
@@ -20,4 +21,4 @@ const userSchema = mongoose.Schema({
 //     this.token = jwt.sign({ userID: this._id, email: this.email }, TOKEN_KEY, { expiresIn: '10h' })
 // }
 
-module.exports = mongoose.model('user',userSchema)
+module.exports = model('user',userSchema)
