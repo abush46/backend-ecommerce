@@ -1,6 +1,6 @@
-import productModel, { find, findOne, findOneAndUpdate, findOneAndDelete } from "../../models/product";
+const productModel = require("../../models/product")
 
-export async function addProduct(req, res) {
+module.exports.addProduct = async (req, res) => {
     try{
 
         const {title, sku, price, image} = req.body;
@@ -21,7 +21,7 @@ export async function addProduct(req, res) {
     }
 }
 
-export async function UseraddProduct(req, res) {
+module.exports.UseraddProduct = async (req, res) => {
     try{
 
         const {title, sku, price, image} = req.body;
@@ -42,11 +42,11 @@ export async function UseraddProduct(req, res) {
     }
 }
 
-export async function getProducts(req, res) {
+module.exports.getProducts = async (req, res) => {
     try{
 
-        const products = await find();
-        const productsCount = await find().count();
+        const products = await productModel.find();
+        const productsCount = await productModel.find().count();
 
         return res.json({
             success : true,
@@ -62,17 +62,17 @@ export async function getProducts(req, res) {
 }
 
 
-export async function updateProduct(req, res) {
+module.exports.updateProduct = async (req, res) => {
     try{
 
         const {title, sku, price, image} = req.body;
         const {id} = req.query;
 
         // check if product exist with the given product id
-        const product = await findOne({_id : id})
+        const product = await productModel.findOne({_id : id})
 
         if(product){
-            const updatedProduct = await findOneAndUpdate({_id : id}, req.body, {new :true})
+            const updatedProduct = await productModel.findOneAndUpdate({_id : id}, req.body, {new :true})
 
             return res.json({
                 success : true,
@@ -95,13 +95,13 @@ export async function updateProduct(req, res) {
     }
 }
 
-export async function deleteProduct(req, res) {
+module.exports.deleteProduct = async (req, res) => {
     try{
 
         const {id} = req.query;
         
         // check if product exist with the given product id
-        const product = await findOneAndDelete({_id : id})
+        const product = await productModel.findOneAndDelete({_id : id})
         if(!product){
             return res.json({
                 success : false,
@@ -118,14 +118,14 @@ export async function deleteProduct(req, res) {
     } 
 }
 
-export async function getAllProducts(req, res) {
+module.exports.getAllProducts = async (req, res) => {
     try{
 
         // Search through title names
         var {search} = req.query
         if(!search) search = ""
 
-        const products = await find({title:{'$regex' : search, '$options' : 'i'}})
+        const products = await productModel.find({title:{'$regex' : search, '$options' : 'i'}})
             .populate("category")
 
         return res.json({

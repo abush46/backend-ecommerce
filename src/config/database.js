@@ -1,15 +1,15 @@
-//database
-import { connect } from "mongoose";
-//import mogoose from 'mongoose';
-//const { DB_CON_STRING } = process.env;
+const mogoose = require("mongoose");
 
-export default () => {
+const { DB_CON_STRING } = process.env;
+
+module.exports = () => {
   // mogoose.connect("mongodb://localhost/ecommerce")
   //mongodb+srv://mic:abush1157@cluster0.9bamq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
   //"mongodb+srv://mic:abush1157@cluster0.9bamq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
   const conn = "mongodb+srv://mic:abush1157@cluster0.9bamq.mongodb.net/?appName=Cluster0";
-  connect(
+  mogoose
+    .connect(
       conn
     )
     //mongodb + srv://abidrazaa:Abcd1234@cluster0.lr2rk.mongodb.net/?retryWrites=true&w=majority")

@@ -1,14 +1,14 @@
-import { sign, verify } from "jsonwebtoken";
+const jwt = require("jsonwebtoken")
 const TOKEN_KEY = process.env.TOKEN_KEY
-import { findOne } from "../../models/user";
+const userModel = require("../../models/user")
 const canSell = process.env.CAN_SELL;
 
 function generateAuthToken(data){
-  const token = sign(data, canSell, { expiresIn: '10h' })
+  const token = jwt.sign(data, canSell, { expiresIn: '10h' })
   return token
 }
 
-export async function isAdmin(req, res, next) {
+module.exports.isAdmin = async (req, res, next) => {
 
     const {email} = req.body;
     // receiving token from the header
@@ -17,13 +17,13 @@ export async function isAdmin(req, res, next) {
     if(token){
         try{
             // decode token with TOKEN key to extract the user
-            const decoded = verify(token,TOKEN_KEY)
+            const decoded = jwt.verify(token,TOKEN_KEY)
 
             // saving the current user in req.user
             req.user = decoded
 
             // checking if the logged in user is ADMIN or not
-            const user = await findOne({_id : decoded?._id, userType : "ADMIN"})
+            const user = await userModel.findOne({_id : decoded?._id, userType : "ADMIN"})
                 .select("-password")
 
             if(!user){
@@ -45,7 +45,7 @@ export async function isAdmin(req, res, next) {
 }
 
 
-export async function checkAuth(req, res, next) {
+module.exports.checkAuth = async (req, res, next) => {
     try{
 
         let token = req.headers["x-auth-token"] || req.body.token || req.query.token;
@@ -53,10 +53,10 @@ export async function checkAuth(req, res, next) {
         if(token){
             try{
 
-                const decoded = verify(token,TOKEN_KEY)
+                const decoded = jwt.verify(token,TOKEN_KEY)
                 req.user = decoded
 
-                const user = await findOne({_id : decoded?._id})
+                const user = await userModel.findOne({_id : decoded?._id})
                     .select("-password")
 
                 if(!user){

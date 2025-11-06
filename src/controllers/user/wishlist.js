@@ -1,14 +1,14 @@
-import { findOneAndUpdate, find } from "../../models/user";
-import { ObjectId } from 'mongodb';
+const userModel = require("../../models/user")
+const {ObjectId} = require('mongodb');
 
 
-export async function addToWishlist(req, res) {
+module.exports.addToWishlist = async (req, res) => {
     try{
 
         const data = req.body
         let user = req.user
 
-        const addToWishlist = await findOneAndUpdate({_id : user?._id}, { $push: { wishlist: data } },{new : true})
+        const addToWishlist = await userModel.findOneAndUpdate({_id : user?._id}, { $push: { wishlist: data } },{new : true})
 
         return res.json({
             success : true,
@@ -21,13 +21,13 @@ export async function addToWishlist(req, res) {
     }
 }
 
-export async function removeFromWishlist(req, res) {
+module.exports.removeFromWishlist = async (req, res) => {
     try{
 
         const id = req.query
         let user = req.user
 
-        const removeFromWishlist = await findOneAndUpdate({_id : user?._id}, { $pull: { wishlist: {productId : ObjectId(id)} } },{new : true})
+        const removeFromWishlist = await userModel.findOneAndUpdate({_id : user?._id}, { $pull: { wishlist: {productId : ObjectId(id)} } },{new : true})
 
         return res.json({
             success : true,
@@ -40,12 +40,12 @@ export async function removeFromWishlist(req, res) {
     }
 }
 
-export async function wishlist(req, res) {
+module.exports.wishlist = async (req, res) => {
     try{
 
         const user = req.user
 
-        const wishlist = await find({_id : user._id})
+        const wishlist = await userModel.find({_id : user._id})
             .populate("wishlist.productId")
             .select("-password -userType")
 

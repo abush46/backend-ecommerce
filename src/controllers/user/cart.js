@@ -1,9 +1,9 @@
-import orderModel from "../../models/order";
-import { findOneAndUpdate, find } from "../../models/user";
-import { findOneAndUpdate as _findOneAndUpdate } from "../../models/product";
-import { ObjectId } from 'mongodb';
+const orderModel = require("../../models/order")
+const userModel = require("../../models/user")
+const productModel = require("../../models/product")
+const {ObjectId} = require('mongodb');
 
-export async function checkout(req, res) {
+module.exports.checkout = async (req, res) => {
     try{
         
         var body = req.body;
@@ -21,7 +21,7 @@ export async function checkout(req, res) {
 
             items.forEach(async item => {
 
-                const updatedQuantity = await _findOneAndUpdate(
+                const updatedQuantity = await productModel.findOneAndUpdate(
                     { _id: item.productId },
                     [{
                         $set: {
@@ -50,13 +50,13 @@ export async function checkout(req, res) {
     }
 }
 
-export async function addToCart(req, res) {
+module.exports.addToCart = async (req, res) => {
     try{
 
         const data = req.body
         let user = req.user
 
-        const addToCart = await findOneAndUpdate({_id : user?._id}, { $push: { cart: data } },{new : true})
+        const addToCart = await userModel.findOneAndUpdate({_id : user?._id}, { $push: { cart: data } },{new : true})
 
         return res.json({
             success : true,
@@ -69,13 +69,13 @@ export async function addToCart(req, res) {
     }
 }
 
-export async function removeFromCart(req, res) {
+module.exports.removeFromCart = async (req, res) => {
     try{
 
         const id = req.query
         let user = req.user
 
-        const removeFromCart = await findOneAndUpdate({_id : user?._id}, { $pull: { cart: {productId : ObjectId(id)} } },{new : true})
+        const removeFromCart = await userModel.findOneAndUpdate({_id : user?._id}, { $pull: { cart: {productId : ObjectId(id)} } },{new : true})
 
         return res.json({
             success : true,
@@ -88,12 +88,12 @@ export async function removeFromCart(req, res) {
     }
 }
 
-export async function cart(req, res) {
+module.exports.cart = async (req, res) => {
     try{
 
         const user = req.user
 
-        const cart = await find({_id : user._id})
+        const cart = await userModel.find({_id : user._id})
             .populate("cart.productId")
             .select("-password -userType")
 

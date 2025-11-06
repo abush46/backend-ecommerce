@@ -1,14 +1,14 @@
-import { Schema, model } from "mongoose"
+const mongoose = require("mongoose")
 
-const orderSchema = Schema({
+const orderSchema = mongoose.Schema({
 
     orderId : String,
-    user : {type:Schema.Types.ObjectId, ref:'user', required:true},
+    user : {type:mongoose.Schema.Types.ObjectId, ref:'user', required:true},
     items : 
         [
             {
-                productId : {type: Schema.Types.ObjectId, ref : "product"}, 
-                categoryId : {type: Schema.Types.ObjectId, ref : "categories"},
+                productId : {type: mongoose.Schema.Types.ObjectId, ref : "product"}, 
+                categoryId : {type: mongoose.Schema.Types.ObjectId, ref : "categories"},
                 quantity : Number, 
                 price : Number
             }
@@ -26,4 +26,4 @@ const orderSchema = Schema({
 
 }, { timestamps : true })
 
-export default model("order", orderSchema)
+module.exports = mongoose.model("order", orderSchema)

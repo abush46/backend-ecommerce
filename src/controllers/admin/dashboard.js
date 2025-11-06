@@ -1,17 +1,17 @@
-import { find } from "../../models/order"
-import { find as _find } from "../../models/user"
-import { find as __find } from "../../models/product"
-import { find as ___find } from "../../models/category"
+const orderModel = require("../../models/order")
+const userModel = require("../../models/user")
+const productModel = require("../../models/product")
+const categoryModel = require("../../models/category")
 
-export async function dashboardData(req, res) {
+module.exports.dashboardData = async (req, res) => {
 
     try{
 
         // counts 
-        const ordersCount = await find().count()
-        const usersCount = await _find().count()
-        const productsCount = await __find().count()
-        const categoriesCount = await ___find().count()
+        const ordersCount = await orderModel.find().count()
+        const usersCount = await userModel.find().count()
+        const productsCount = await productModel.find().count()
+        const categoriesCount = await categoryModel.find().count()
 
         return res.json({
             success : true,
@@ -30,12 +30,12 @@ export async function dashboardData(req, res) {
 
 }
 
-export async function getAllUsers(req, res) {
+module.exports.getAllUsers = async (req, res) => {
 
     try{
 
         // all users
-        const users = await _find()
+        const users = await userModel.find()
             .select("-password -token")
 
         return res.json({

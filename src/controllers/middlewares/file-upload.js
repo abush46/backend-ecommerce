@@ -1,9 +1,9 @@
-import multer, { diskStorage } from 'multer'
+const multer  = require('multer')
 
-export async function uploadFile(req, res, next) {
+module.exports.uploadFile = async (req, res, next) => {
     try {
         console.log("DSf")
-        const storage = diskStorage({
+        const storage = multer.diskStorage({
             destination: function (req, file, cb) {
               cb(null, 'public/storage/')
             },

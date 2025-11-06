@@ -1,14 +1,14 @@
-import {userModel} from "../../models/user.js";
-import { compare, hash } from "bcryptjs";
-import { sign } from "jsonwebtoken";
+const userModel = require("../../models/user").default;
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken")
 const JWT_SECRET_KEY = process.env.TOKEN_KEY
 const canSell = process.env.CAN_SELL;
 function generateAuthToken(data){
-  const token = sign(data, JWT_SECRET_KEY, { expiresIn: '10h' })
+  const token = jwt.sign(data, JWT_SECRET_KEY, { expiresIn: '10h' })
   return token
 }
 
-export async function login(req, res) {
+module.exports.login = async (req, res) => {
   try {
 
     const { email, password } = req.body;
@@ -23,7 +23,7 @@ export async function login(req, res) {
     }
 
     // bcrypting the password and comparing with the one in db
-    if (await compare(password, user.password)) {
+    if (await bcrypt.compare(password, user.password)) {
 
       const token = generateAuthToken({_id : user?._id, email : email})
       user.token = token
@@ -45,9 +45,9 @@ export async function login(req, res) {
   } catch (error) {
     return res.send(error.message);
   }
-}
+};
 
-export async function register(req, res) {
+module.exports.register = async (req, res) => {
   try {
     const { email, password, name, userType } = req.body;
 
@@ -58,7 +58,7 @@ export async function register(req, res) {
         message: "email or password is empty",
       });
     }
-    req.body.password = await hash(password, 10);
+    req.body.password = await bcrypt.hash(password, 10);
 
     let user = new userModel(req.body);
     await user.save();
@@ -71,9 +71,9 @@ export async function register(req, res) {
   } catch (error) {
     return res.send(error.message);
   }
-}
+};
 
-export async function updateUser(req, res) {
+module.exports.updateUser = async (req, res) => {
   try {
 
     const userDataToBeUpdated = req.body;
@@ -96,9 +96,9 @@ export async function updateUser(req, res) {
   } catch (error) {
     return res.send("error : ", error.message);
   }
-}
+};
 
-export async function deleteUser(req, res) {
+module.exports.deleteUser = async (req, res) => {
   try {
     const { id } = req.query;
 
@@ -114,9 +114,9 @@ export async function deleteUser(req, res) {
   } catch (error) {
     return res.status(400).send(error.message);
   }
-}
+};
 
-export async function userById(req, res) {
+module.exports.userById = async (req, res) => {
   try {
     const { id } = req.query;
 
@@ -134,7 +134,7 @@ export async function userById(req, res) {
     }
 }
 
-export async function resetPassword(req, res) {
+module.exports.resetPassword = async (req, res) => {
 
     try{
         const {password, newPassword} = req.body;
@@ -147,9 +147,9 @@ export async function resetPassword(req, res) {
         if(!user) return res.send("user does not exist")
     
         // comparing the password from the password in DB to allow changes
-        if(compare(password, user?.password)){
+        if(bcrypt.compare(password, user?.password)){
             // encrypting new password 
-            user.password = await hash(newPassword,10)
+            user.password = await bcrypt.hash(newPassword,10)
             user.save()
             return res.json({
                 success : true,

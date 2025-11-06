@@ -1,10 +1,10 @@
-import { find } from "../../models/order"
+const ordersModel = require("../../models/order")
 
-export async function orders(req, res) {
+module.exports.orders = async (req, res) => {
     try{
 
         const user = req.user
-        const orders = await find({user : user._id})
+        const orders = await ordersModel.find({user : user._id})
             .populate({path : "user" , select : "-password -token"})
             .populate("items.productId")
             .populate("items.categoryId")
