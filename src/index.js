@@ -59,6 +59,72 @@ app.get('/', (req, res) => {
   res.send('API Server is Running');
 });
 
+
+
+// AUTH
+app.post('/register', register);
+app.post("/login", login)
+
+
+// User Routes
+app.post("/update-user", updateUser)
+app.get("/user", userById)
+app.get("/delete-user", deleteUser)
+app.post("/reset-password", resetPassword)
+
+
+// Products
+app.post("/product", [isAdmin], addProduct)
+app.post("/user-add-product",[checkAuth], UseraddProduct)
+app.get("/products", getAllProducts)
+app.post("/update-product", [isAdmin], updateProduct)
+app.get("/delete-product", [isAdmin], deleteProduct)
+
+
+// CATEGORIES
+app.post("/category", [isAdmin], addCategory)
+app.get("/categories", getCategories)
+app.post("/update-category", [isAdmin], updateCategory)
+app.get("/delete-category", [isAdmin], deleteCategory)
+
+
+// ORDERS
+app.get("/orders",[checkAuth],orders)
+
+// CHECKOUT
+app.post("/checkout",[checkAuth],checkout)
+
+// WISHLIST
+app.post("/add-to-wishlist",[checkAuth],addToWishlist)
+app.get("/wishlist",[checkAuth],wishlist)
+app.get("/remove-from-wishlist",[checkAuth],removeFromWishlist)
+
+// ADMIN
+app.get("/dashboard",[isAdmin],dashboardData)
+app.get("/admin/orders",[isAdmin],getAllOrders)
+app.get("/admin/order-status",[isAdmin],changeStatusOfOrder)
+app.get("/admin/users",[isAdmin],getAllUsers)
+
+// HELPER
+app.post('/photos/upload', upload.array('photos', 12), function (req, res, next) {  
+  // req.files is array of `photos` files
+
+  try{
+    let files = req.files;
+    if(!files.length){
+      return res.status(400).json({ err:'Please upload an image', msg:'Please upload an image' })
+    }
+    let file = req.files[0]
+    if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+        return res.status(400).json({"image" : file.filename}) 
+    }
+  }
+  catch(error){
+    return res.send(error.message)
+  }
+})
+
+
 /* app.get('/', (_req, res) => {
   res.send('Hello Express!')
 })
