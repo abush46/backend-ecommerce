@@ -22,18 +22,26 @@ module.exports.addCategory = async (req, res) => {
 }
 
 module.exports.getCategories = async (req, res) => {
-    try{
+    try {
 
         const categories = await categoryModel.find();
         const categoriesCount = await categoryModel.find().count();
-
-        return res.json({
-            success : true,
-            status : 400,
-            message : "list of all categories",
-            categories,
-            count : categoriesCount
-        })
+        if (!categories.length && !categoriesCount) {
+            return res.json({
+                success: false,
+                status: 400,
+                message: "No categories found",
+                count: 0,
+            })
+        } else {
+            return res.json({
+                success: true,
+                status: 400,
+                message: "list of all categories",
+                categories,
+                count: categoriesCount
+            })
+        }
 
     }catch(error){
         return res.send(error.message)
