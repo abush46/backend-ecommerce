@@ -9,7 +9,7 @@ var cors = require('cors')
 
 // To access public folder
 app.use(cors())
-app.use(express.static(path.join(__dirname, 'public')));
+app.use("/public",express.static(path.join(__dirname, '../public')));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json())
@@ -18,11 +18,11 @@ app.use(express.json())
 dotenv.config();
 
 // MULTER
-const multer = require('multer')
+ const multer = require('multer')
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/uploads/')
+    cb(null, '../public/uploads/')
   },
   filename: function (req, file, cb) {
     let uploadFile = file.originalname.split('.')
@@ -30,7 +30,7 @@ const storage = multer.diskStorage({
     cb(null, name)
   }
 })
-const upload = multer({ storage: storage })
+const upload = multer({ storage: storage }) 
 
 const { register, login, updateUser, deleteUser, userById, resetPassword } = require("./controllers/auth/auth");
 const { UseraddProduct,addProduct, updateProduct, deleteProduct, getAllProducts } = require("./controllers/products/products")
