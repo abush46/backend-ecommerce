@@ -2,7 +2,7 @@ const { connect } = require("http2");
 const {mogoose,MongoClient, ServerApiVersion} = require("mongoose");
 
 const { DB_CON_STRING } = process.env;
-const conn = "mongodb+srv://mic:abush1157@cluster0.9bamq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const conn = "mongodb+srv://mic:abush1157@cluster0.9bamq.mongodb.net/?appName=Cluster0";
  /*  const client = new MongoClient(conn, {
   serverApi: {
    // version: ServerApiVersion.v1,
