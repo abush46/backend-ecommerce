@@ -45,9 +45,9 @@ const {connection} = require("./config/database");
 const {getProducts} = require("./controllers/test/testController");
 //const { getUserById, createUser } =require('./controllers/userController');
 
-connection();
+//connection();
 
-//getProducts();
+getProducts();
 //app.post('/api/byId', getUserById);
 
  //app.post('/api/create', createUser);
