@@ -9,7 +9,7 @@ var cors = require('cors')
 
 // To access public folder
 app.use(cors())
-app.use('/api/static',express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json())
@@ -47,7 +47,7 @@ const {getProducts} = require("./controllers/test/testController");
 
 mongoose();
 
-getProducts();
+//getProducts();
 //app.post('/api/byId', getUserById);
 
  //app.post('/api/create', createUser);
@@ -55,6 +55,7 @@ getProducts();
 
 // Basic root route (optional)
 app.get('/', (req, res) => {
+  //const image = req.body.image;
    //res.json({ message: 'Data received successfully!' });
   res.send('API Server is Running');
 });
