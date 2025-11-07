@@ -41,11 +41,11 @@ const { getAllOrders, changeStatusOfOrder } = require('./controllers/admin/order
 const { orders } = require('./controllers/user/orders');
 const { addCategory, getCategories, updateCategory, deleteCategory } = require('./controllers/categories/category');
 const { addToWishlist, wishlist, removeFromWishlist } = require('./controllers/user/wishlist');
-const mongoose = require("./config/database");
+const {connection} = require("./config/database");
 const {getProducts} = require("./controllers/test/testController");
 //const { getUserById, createUser } =require('./controllers/userController');
 
-mongoose();
+connection();
 
 //getProducts();
 //app.post('/api/byId', getUserById);
