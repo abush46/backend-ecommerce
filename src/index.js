@@ -7,6 +7,13 @@ const jwt = require('jsonwebtoken');
 var path = require('path');
 var cors = require('cors')
 
+import { v2 as cloudinary } from "cloudinary";
+const CLOUDINARY_CLOUD_NAME = "dotfreaix";
+  //process.env.CLOUDINARY_URL;
+const CLOUDINARY_API_KEY = "749231185329934";
+  //process.env.CLOUDINARY_API_KEY;
+const CLOUDINARY_API_SECRET = "vTPwxrQSGsVUepnZwzzcj3J53hc";
+  //process.env.CLOUDINARY_API_SECRET;
 // To access public folder
 app.use(cors())
 app.use("/public",express.static(path.join(__dirname, '../public')));
@@ -17,6 +24,11 @@ app.use(express.json())
 // Set up Global configuration access
 dotenv.config();
 
+cloudinary.config({
+  cloud_name: CLOUDINARY_CLOUD_NAME,
+  api_key: CLOUDINARY_API_KEY,
+  api_secret: CLOUDINARY_API_SECRET,
+});
 // MULTER
  const multer = require('multer')
 
@@ -128,6 +140,24 @@ app.post('/api/photos/upload', upload.array('photos', 12), function (req, res, n
     return res.json({error: error.message })
   }
 })
+
+app.post("/upload", upload.single("image"), async (req, res) => {
+  try {
+    const fileBuffer = req.file.buffer.toString("base64");
+    const uploaded = await cloudinary.uploader.upload(
+      `data:${req.file.mimetype};base64,${fileBuffer}`,
+      { folder: "uploads" }
+    );
+
+    res.json({
+      success: true,
+      url: uploaded.secure_url,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: "Upload failed" });
+  }
+});
 
 
 /* app.get('/', (_req, res) => {
