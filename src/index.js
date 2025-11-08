@@ -155,7 +155,7 @@ app.post("/api/upload", upload.single("image"), async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, error: "Upload failed" });
+    res.status(500).json({ success: false, error: "Upload failed" , message: error.message});
   }
 });
 
