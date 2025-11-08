@@ -141,7 +141,7 @@ app.post('/api/photos/upload', upload.array('photos', 12), function (req, res, n
   }
 })
 
-app.post("/upload", upload.single("image"), async (req, res) => {
+app.post("/api/upload", upload.single("image"), async (req, res) => {
   try {
     const fileBuffer = req.file.buffer.toString("base64");
     const uploaded = await cloudinary.uploader.upload(
