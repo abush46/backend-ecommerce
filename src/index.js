@@ -125,7 +125,7 @@ app.post('/api/photos/upload', upload.array('photos', 12), function (req, res, n
     }
   }
   catch(error){
-    return res.send(error.message)
+    return res.json({error: error.message })
   }
 })
 
