@@ -5,7 +5,8 @@ var bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
 var path = require('path');
-var cors = require('cors')
+var cors = require('cors');
+const { put } = require('@vercel/blob');
 
 import { v2 as cloudinary } from "cloudinary";
 const CLOUDINARY_CLOUD_NAME = "dotfreaix";
@@ -15,6 +16,8 @@ const CLOUDINARY_API_KEY = "749231185329934";
 const CLOUDINARY_API_SECRET = "vTPwxrQSGsVUepnZwzzcj3J53hc";
   //process.env.CLOUDINARY_API_SECRET;
 // To access public folder
+
+const BLOB_READ_WRITE_TOKEN = "vercel_blob_rw_ntA20obkZVE9HsHp_W5sYu8TiMypWuKOyXoVz2w1wH4RAZR";
 app.use(cors())
 app.use("/public",express.static(path.join(__dirname, '../public')));
 
@@ -42,7 +45,7 @@ const storage = multer.diskStorage({
     cb(null, name)
   }
 })
-const upload = multer({ storage: storage }) 
+const upload = multer(); 
 
 const { register, login, updateUser, deleteUser, userById, resetPassword } = require("./controllers/auth/auth");
 const { UseraddProduct,addProduct, updateProduct, deleteProduct, getAllProducts } = require("./controllers/products/products")
@@ -141,7 +144,7 @@ app.post('/api/photos/upload', upload.array('photos', 12), function (req, res, n
   }
 })
 
-app.post("/api/upload", upload.array("image"), async (req, res) => {
+/* app.post("/api/upload", upload.array("image"), async (req, res) => {
   try {
     const fileBuffer = req.file.buffer.toString("base64");
     const uploaded = await cloudinary.uploader.upload(
@@ -157,8 +160,32 @@ app.post("/api/upload", upload.array("image"), async (req, res) => {
     console.error(error);
     res.status(500).json({ success: false, error: "Upload failed" , message: error.message});
   }
-});
+}); */
 
+app.post('/api/upload', upload.single('file'), async (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: 'No file uploaded.' });
+  }
+
+  try {
+    const blob = await put(req.file.originalname, req.file.buffer, {
+      access: 'public', // Makes the file publicly accessible via its URL
+      addRandomSuffix: true, // Adds a unique suffix for non-guessable URLs
+      token: BLOB_READ_WRITE_TOKEN // Ensure the token is passed if needed, though Vercel environment handles it
+    });
+
+    // The result 'blob' contains the URL and other metadata
+    res.status(200).json({
+      message: 'File uploaded successfully',
+      url: blob.url,
+      pathname: blob.pathname
+    });
+
+  } catch (error) {
+    console.error('Vercel Blob upload error:', error);
+    res.status(500).json({ message: 'Failed to upload file', error: error.message });
+  }
+});
 
 /* app.get('/', (_req, res) => {
   res.send('Hello Express!')
