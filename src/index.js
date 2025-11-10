@@ -164,7 +164,7 @@ app.post('/api/photos/upload', upload.array('photos', 12), function (req, res, n
 
 app.post('/api/upload', upload.single('file'), async (req, res) => {
   if (!req.file) {
-    return res.status(400).json({ message: 'No file uploaded.' });
+    return res.json({ message: 'No file uploaded.' });
   }
 
   try {
@@ -175,7 +175,7 @@ app.post('/api/upload', upload.single('file'), async (req, res) => {
     });
 
     // The result 'blob' contains the URL and other metadata
-    res.status(200).json({
+    res.json({
       message: 'File uploaded successfully',
       url: blob.url,
       pathname: blob.pathname
@@ -183,7 +183,7 @@ app.post('/api/upload', upload.single('file'), async (req, res) => {
 
   } catch (error) {
     console.error('Vercel Blob upload error:', error);
-    res.status(500).json({ message: 'Failed to upload file', error: error.message });
+    res.json({ message: 'Failed to upload file', error: error.message });
   }
 });
 
