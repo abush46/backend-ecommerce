@@ -161,6 +161,30 @@ app.post('/api/photos/upload', upload.array('photos', 12), function (req, res, n
     res.status(500).json({ success: false, error: "Upload failed" , message: error.message});
   }
 }); */
+app.post('/api/upload-categories', upload.single('file'), async (req, res) => {
+  if (!req.file) {
+    return res.json({ message: 'No file uploaded.' });
+  }
+
+  try {
+    const blob = await put("categories/"+req.file.originalname, req.file.buffer, {
+      access: 'public', // Makes the file publicly accessible via its URL
+      addRandomSuffix: true, // Adds a unique suffix for non-guessable URLs
+      token: BLOB_READ_WRITE_TOKEN // Ensure the token is passed if needed, though Vercel environment handles it
+    });
+
+    // The result 'blob' contains the URL and other metadata
+    res.json({
+      message: 'File uploaded successfully',
+      url: blob.url,
+      pathname: blob.pathname
+    });
+
+  } catch (error) {
+    console.error('Vercel Blob upload error:', error);
+    res.json({ message: 'Failed to upload file', error: error.message });
+  }
+});
 
 app.post('/api/upload', upload.single('file'), async (req, res) => {
   if (!req.file) {
